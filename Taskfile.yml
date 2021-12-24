@@ -1,0 +1,22 @@
+version: '3'
+
+env:
+  BUILD_DIR: ./bin
+
+tasks:
+  all:
+    - task: test
+    - task: lint
+
+  build:
+    cmds:
+      - go build -o $BUILD_DIR/shortener ./cmd/shortener
+      - $BUILD_DIR/shortener
+
+  test:
+    cmds:
+      - go test ./...
+
+  lint:
+    cmds:
+      - golangci-lint run ./...
